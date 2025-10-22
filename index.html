@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dustin Nguyen — Portfolio</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <meta name="description" content="Portfolio site demonstrating semantic HTML and user-centered design." />
+</head>
+<body>
+  <header>
+    <h1>Dustin Nguyen</h1>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="experiments.html">Experiments</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <figure>
+        <img src="assets/images/project1.jpg" alt="Hero placeholder" width="800" />
+        <figcaption>Featured work</figcaption>
+      </figure>
+      <h2>Frontend Student & Problem Solver</h2>
+      <p>Building accessible, semantic-first web pages and experimenting with modern HTML.</p>
+      <p><a href="projects.html">View Projects</a></p>
+    </section>
+
+    <section id="featured" style="display:flex; gap:1rem; align-items:flex-start;">
+      <article style="flex:7">
+        <h2>Latest Highlight Project</h2>
+        <h3>Project 1 — Example Case Study</h3>
+        <p>Short summary of the project goals and technologies used. This is placeholder text for the case study overview.</p>
+        <p><a href="projects/project-1.html">Read case study</a></p>
+      </article>
+
+      <aside style="flex:3">
+        <h3>More Projects</h3>
+        <div class="card"><strong>Project 2</strong><p>Short blurb</p></div>
+        <div class="card"><strong>Project 3</strong><p>Short blurb</p></div>
+        <h4>Experiments</h4>
+        <p><a href="experiments.html">Tag demos & experiments</a></p>
+        <h4>Contact</h4>
+        <p><a href="contact.html">Contact me</a></p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <p>Resume: <a href="assets/resume.pdf">resume.pdf</a></p>
+    <p>Contact: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+  </footer>
+
+  <script>
+    class HelloWorldConsole extends HTMLElement {
+      connectedCallback() {
+        console.log("Hello world! - printed by <hello-world-console>");
+      }
+    }
+    customElements.define('hello-world-console', HelloWorldConsole);
+  </script>
+  <hello-world-console></hello-world-console>
+</body>
+</html>
