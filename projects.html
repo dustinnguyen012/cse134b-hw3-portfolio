@@ -108,43 +108,5 @@
     <p><a href="index.html">Back to Home</a> | <a href="contact.html">Get in Touch</a></p>
   </footer>
 
-  <!-- Project Filter Script (under 15 lines) -->
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projects = document.querySelectorAll('.project-grid article');
-    
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const category = btn.dataset.category;
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        projects.forEach(project => {
-          project.classList.toggle('hidden', category !== 'all' && project.dataset.category !== category);
-        });
-      });
-    });
-  });
-  </script>
-
-  <!-- Hamburger Menu Script (under 15 lines) -->
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    if (header && window.innerWidth < 768) {
-      const button = document.createElement('button');
-      button.className = 'menu-toggle';
-      button.textContent = '☰ Menu';
-      button.setAttribute('aria-label', 'Toggle navigation menu');
-      header.insertBefore(button, header.querySelector('nav'));
-      button.addEventListener('click', () => {
-        const nav = header.querySelector('nav ul');
-        nav.classList.toggle('active');
-        button.textContent = nav.classList.contains('active') ? '✕ Close' : '☰ Menu';
-      });
-    }
-  });
-  </script>
-
 </body>
 </html>

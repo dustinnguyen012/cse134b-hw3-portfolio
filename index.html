@@ -111,34 +111,5 @@
   <!-- Hello World console custom element -->
   <hello-world-console></hello-world-console>
 
-  <script>
-    // Hello World custom element
-    class HelloWorldConsole extends HTMLElement {
-      connectedCallback() {
-        console.log("Hello world! - from <hello-world-console>");
-      }
-    }
-    customElements.define('hello-world-console', HelloWorldConsole);
-  </script>
-
-  <!-- Hamburger Menu Script (under 15 lines) -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('header');
-  if (header && window.innerWidth < 768) {
-    const button = document.createElement('button');
-    button.className = 'menu-toggle';
-    button.textContent = '☰ Menu';
-    button.setAttribute('aria-label', 'Toggle navigation menu');
-    header.insertBefore(button, header.querySelector('nav'));
-    button.addEventListener('click', () => {
-      const nav = header.querySelector('nav ul');
-      nav.classList.toggle('active');
-      button.textContent = nav.classList.contains('active') ? '✕ Close' : '☰ Menu';
-    });
-  }
-});
-</script>
-
 </body>
 </html>
