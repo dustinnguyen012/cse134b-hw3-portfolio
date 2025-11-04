@@ -1,0 +1,961 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+/* ================================
+   PART 1: CSS Variables with Fallbacks
+   ================================ */
+:root {
+  /* Color Variables */
+  --color-primary: #2563eb;
+  --color-primary-dark: #1e40af;
+  --color-secondary: #7c3aed;
+  --color-accent: #f59e0b;
+  --color-text: #1f2937;
+  --color-text-light: #6b7280;
+  --color-background: #ffffff;
+  --color-surface: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-success: #10b981;
+  
+  /* Spacing Variables */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  
+  /* Typography Variables */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  
+  /* Layout Variables */
+  --max-width: 1200px;
+  --border-radius: 0.5rem;
+  --transition-speed: 0.3s;
+  
+  /* Shadow Variables */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   Base Styles with Relative Units
+   ================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; /* Base for rem calculations */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans, sans-serif); /* Fallback to sans-serif */
+  color: var(--color-text, #1f2937);
+  background-color: var(--color-background, #ffffff);
+  line-height: 1.6;
+  font-size: var(--font-size-base, 1rem);
+}
+
+/* ================================
+   PART 1: Typography with Custom Fonts
+   ================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display, serif); /* Fallback to serif */
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, var(--font-size-3xl, 2rem));
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, var(--font-size-2xl, 1.5rem));
+  color: var(--color-primary, #2563eb);
+  margin-top: 2rem;
+}
+
+h3 {
+  font-size: var(--font-size-xl, 1.25rem);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--color-primary, #2563eb);
+  text-decoration: none;
+  transition: color var(--transition-speed, 0.3s) ease;
+  
+  &:hover {
+    color: var(--color-primary-dark, #1e40af);
+    text-decoration: underline;
+  }
+  
+  &:focus {
+    outline: 2px solid var(--color-accent, #f59e0b);
+    outline-offset: 2px;
+  }
+}
+
+/* ================================
+   PART 1: CSS Grid Layout for Header
+   ================================ */
+header {
+  background: linear-gradient(135deg, 
+    var(--color-primary, #2563eb) 0%, 
+    var(--color-secondary, #7c3aed) 100%);
+  color: white;
+  padding: var(--spacing-lg, 2rem) var(--spacing-md, 1.5rem);
+  box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  
+  & h1 {
+    color: white;
+    margin: 0 0 var(--spacing-sm, 1rem) 0;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  & > p {
+    margin: 0 0 var(--spacing-md, 1.5rem) 0;
+    opacity: 0.9;
+  }
+}
+
+/* ================================
+   PART 1 & 3: Responsive Navigation with Flexbox
+   BASELINE 2024: :has() selector for dynamic styling
+   ================================ */
+nav[aria-label="Main navigation"] {
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm, 1rem);
+    list-style: none;
+    padding: 0;
+    
+    & li {
+      & a {
+        color: white;
+        padding: var(--spacing-xs, 0.5rem) var(--spacing-sm, 1rem);
+        border-radius: var(--border-radius, 0.5rem);
+        display: block;
+        font-weight: 600;
+        transition: all var(--transition-speed, 0.3s) ease;
+        background-color: rgba(255, 255, 255, 0.1);
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+          text-decoration: none;
+        }
+        
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+/* BASELINE 2024 FEATURE: :has() pseudo-class
+   Style header differently when navigation contains active link */
+header:has(nav a:hover) {
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+}
+
+/* ================================
+   PART 1: Main Layout with CSS Grid
+   ================================ */
+main {
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  padding: var(--spacing-xl, 3rem) var(--spacing-md, 1.5rem);
+  min-height: 70dvh; /* Dynamic viewport height */
+}
+
+/* ================================
+   PART 1: Section Styling with Flexbox
+   ================================ */
+section {
+  margin-bottom: var(--spacing-2xl, 4rem);
+  padding: var(--spacing-lg, 2rem);
+  background-color: var(--color-surface, #f3f4f6);
+  border-radius: var(--border-radius, 0.5rem);
+  box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+  
+  /* NESTED CSS */
+  & h2 {
+    margin-top: 0;
+    padding-bottom: var(--spacing-sm, 1rem);
+    border-bottom: 2px solid var(--color-primary, #2563eb);
+  }
+  
+  & article {
+    background-color: var(--color-background, #ffffff);
+    padding: var(--spacing-md, 1.5rem);
+    border-radius: var(--border-radius, 0.5rem);
+    margin-bottom: var(--spacing-md, 1.5rem);
+    
+    & h3, & h4 {
+      color: var(--color-secondary, #7c3aed);
+    }
+  }
+}
+
+/* ================================
+   PART 1: Project Grid with CSS Grid
+   ================================ */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg, 2rem);
+  padding: var(--spacing-lg, 2rem);
+  
+  & article {
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed, 0.3s) ease;
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+    }
+  }
+}
+
+/* ================================
+   PART 1 & 2: Responsive Images
+   ================================ */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--border-radius, 0.5rem);
+}
+
+picture {
+  display: block;
+  margin: var(--spacing-md, 1.5rem) 0;
+  
+  & img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* ================================
+   PART 1: Sidebar with Flexbox
+   ================================ */
+.sidebar {
+  background-color: var(--color-background, #ffffff);
+  padding: var(--spacing-lg, 2rem);
+  border-radius: var(--border-radius, 0.5rem);
+  border-left: 4px solid var(--color-accent, #f59e0b);
+  
+  & h3 {
+    color: var(--color-accent, #f59e0b);
+  }
+  
+  & ul, & ol {
+    margin-left: var(--spacing-md, 1.5rem);
+    
+    & li {
+      margin-bottom: var(--spacing-xs, 0.5rem);
+    }
+  }
+}
+
+/* ================================
+   PART 1: Forms Styling
+   ================================ */
+form {
+  background-color: var(--color-background, #ffffff);
+  padding: var(--spacing-xl, 3rem);
+  border-radius: var(--border-radius, 0.5rem);
+  
+  & fieldset {
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: var(--border-radius, 0.5rem);
+    padding: var(--spacing-lg, 2rem);
+    margin-bottom: var(--spacing-lg, 2rem);
+    
+    & legend {
+      font-weight: 600;
+      color: var(--color-primary, #2563eb);
+      padding: 0 var(--spacing-sm, 1rem);
+    }
+  }
+  
+  & label {
+    display: block;
+    margin-bottom: var(--spacing-xs, 0.5rem);
+    font-weight: 600;
+    color: var(--color-text, #1f2937);
+  }
+  
+  & input[type="text"],
+  & input[type="email"],
+  & input[type="tel"],
+  & textarea,
+  & select {
+    width: 100%;
+    padding: var(--spacing-sm, 1rem);
+    border: 2px solid var(--color-border, #e5e7eb);
+    border-radius: var(--border-radius, 0.5rem);
+    font-size: var(--font-size-base, 1rem);
+    font-family: var(--font-sans, sans-serif);
+    transition: border-color var(--transition-speed, 0.3s) ease;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary, #2563eb);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+  }
+  
+  & textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  & button {
+    background-color: var(--color-primary, #2563eb);
+    color: white;
+    padding: var(--spacing-sm, 1rem) var(--spacing-lg, 2rem);
+    border: none;
+    border-radius: var(--border-radius, 0.5rem);
+    font-size: var(--font-size-base, 1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed, 0.3s) ease;
+    margin-right: var(--spacing-sm, 1rem);
+    
+    &:hover {
+      background-color: var(--color-primary-dark, #1e40af);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    &[type="reset"] {
+      background-color: var(--color-text-light, #6b7280);
+      
+      &:hover {
+        background-color: var(--color-text, #1f2937);
+      }
+    }
+  }
+  
+  & div {
+    margin-bottom: var(--spacing-md, 1.5rem);
+  }
+}
+
+/* ================================
+   PART 1: Progress Bar Styling
+   ================================ */
+progress {
+  width: 100%;
+  height: 1.5rem;
+  border-radius: var(--border-radius, 0.5rem);
+  overflow: hidden;
+  appearance: none;
+  
+  &::-webkit-progress-bar {
+    background-color: var(--color-surface, #f3f4f6);
+    border-radius: var(--border-radius, 0.5rem);
+  }
+  
+  &::-webkit-progress-value {
+    background: linear-gradient(90deg, 
+      var(--color-primary, #2563eb), 
+      var(--color-success, #10b981));
+    border-radius: var(--border-radius, 0.5rem);
+    transition: width 0.5s ease;
+  }
+  
+  &::-moz-progress-bar {
+    background: linear-gradient(90deg, 
+      var(--color-primary, #2563eb), 
+      var(--color-success, #10b981));
+    border-radius: var(--border-radius, 0.5rem);
+  }
+}
+
+/* ================================
+   PART 1: Animations, Transitions, and Transforms
+   ================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Apply animations to sections */
+section {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Animated button hover effect */
+button, 
+input[type="submit"],
+input[type="button"] {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Animated links */
+nav a {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent, #f59e0b);
+    transition: width var(--transition-speed, 0.3s) ease;
+  }
+  
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+/* ================================
+   PART 1: Dialog Styling
+   ================================ */
+dialog {
+  border: none;
+  border-radius: var(--border-radius, 0.5rem);
+  padding: var(--spacing-lg, 2rem);
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+  background-color: var(--color-background, #ffffff);
+  max-width: 90vw;
+  
+  &[open] {
+    animation: slideInFromLeft 0.4s ease-out;
+  }
+}
+
+/* ================================
+   PART 1: Custom Elements Styling
+   ================================ */
+project-card, demo-card {
+  display: block;
+  padding: var(--spacing-lg, 2rem);
+  margin: var(--spacing-md, 1.5rem) 0;
+  background-color: var(--color-surface, #f3f4f6);
+  border-radius: var(--border-radius, 0.5rem);
+  border-left: 4px solid var(--color-secondary, #7c3aed);
+  
+  & h3, & h4 {
+    margin-top: 0;
+    color: var(--color-secondary, #7c3aed);
+  }
+}
+
+/* ================================
+   PART 1: Breadcrumb Navigation
+   ================================ */
+nav[aria-label="Breadcrumb"] {
+  margin-bottom: var(--spacing-lg, 2rem);
+  
+  & ol {
+    display: flex;
+    gap: var(--spacing-xs, 0.5rem);
+    list-style: none;
+    flex-wrap: wrap;
+    
+    & li {
+      display: flex;
+      align-items: center;
+      
+      &::after {
+        content: '›';
+        margin-left: var(--spacing-xs, 0.5rem);
+        color: var(--color-text-light, #6b7280);
+      }
+      
+      &:last-child::after {
+        content: '';
+      }
+      
+      &:last-child {
+        font-weight: 600;
+        color: var(--color-text, #1f2937);
+      }
+    }
+  }
+}
+
+/* ================================
+   Footer Styling
+   ================================ */
+footer {
+  background-color: var(--color-text, #1f2937);
+  color: white;
+  padding: var(--spacing-xl, 3rem) var(--spacing-md, 1.5rem);
+  text-align: center;
+  margin-top: var(--spacing-2xl, 4rem);
+  
+  & a {
+    color: var(--color-accent, #f59e0b);
+    
+    &:hover {
+      color: white;
+    }
+  }
+  
+  & p {
+    margin-bottom: var(--spacing-sm, 1rem);
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* ================================
+   SVG Styling
+   ================================ */
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: var(--spacing-md, 1.5rem) auto;
+}
+
+/* ================================
+   Iframe Responsive
+   ================================ */
+iframe {
+  max-width: 100%;
+  border-radius: var(--border-radius, 0.5rem);
+  display: block;
+  margin: var(--spacing-md, 1.5rem) 0;
+}
+
+/* ================================
+   PART 3: RESPONSIVE DESIGN - MOBILE FIRST
+   Media Queries for Phone, Tablet, Desktop
+   ================================ */
+
+/* ================================
+   Mobile Styles (Base - up to 768px)
+   ================================ */
+/* Mobile is the default above */
+
+/* Hamburger menu button (mobile only) */
+.menu-toggle {
+  display: none; /* Hidden by default, shown in mobile view */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--spacing-xs, 0.5rem);
+}
+
+/* Stack navigation vertically on small screens */
+@media (max-width: 767px) {
+  /* Show hamburger menu button */
+  header {
+    & .menu-toggle {
+      display: block;
+      margin-bottom: var(--spacing-sm, 1rem);
+    }
+    
+    & nav[aria-label="Main navigation"] ul {
+      flex-direction: column;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      
+      &.active {
+        max-height: 500px;
+      }
+      
+      & li {
+        width: 100%;
+        
+        & a {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+  /* Reduce padding for mobile */
+  main {
+    padding: var(--spacing-lg, 2rem) var(--spacing-sm, 1rem);
+  }
+  
+  section {
+    padding: var(--spacing-md, 1.5rem);
+    margin-bottom: var(--spacing-lg, 2rem);
+  }
+  
+  /* Single column grid on mobile */
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md, 1.5rem);
+  }
+  
+  /* Stack form elements */
+  form {
+    padding: var(--spacing-lg, 2rem) var(--spacing-md, 1.5rem);
+    
+    & button {
+      width: 100%;
+      margin-bottom: var(--spacing-sm, 1rem);
+      margin-right: 0;
+    }
+  }
+  
+  /* Smaller typography on mobile */
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  /* Adjust dialog for mobile */
+  dialog {
+    max-width: 95vw;
+    padding: var(--spacing-md, 1.5rem);
+  }
+  
+  /* Make iframe responsive */
+  iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  
+  /* Touch-friendly sizing for buttons and links */
+  button,
+  a {
+    min-height: 44px; /* Apple's recommended touch target size */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  nav[aria-label="Main navigation"] ul li a {
+    padding: var(--spacing-md, 1.5rem) var(--spacing-sm, 1rem);
+  }
+}
+
+/* ================================
+   Tablet Styles (768px - 1024px)
+   ================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Navigation can be horizontal but condensed */
+  header nav[aria-label="Main navigation"] ul {
+    justify-content: center;
+    gap: var(--spacing-xs, 0.5rem);
+    
+    & li a {
+      padding: var(--spacing-xs, 0.5rem) var(--spacing-sm, 1rem);
+      font-size: var(--font-size-sm, 0.875rem);
+    }
+  }
+  
+  /* Two column grid for projects */
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md, 1.5rem);
+  }
+  
+  /* Moderate padding */
+  main {
+    padding: var(--spacing-xl, 3rem) var(--spacing-lg, 2rem);
+  }
+  
+  section {
+    padding: var(--spacing-lg, 2rem) var(--spacing-md, 1.5rem);
+  }
+  
+  /* Two column form layout where appropriate */
+  form fieldset > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md, 1.5rem);
+  }
+  
+  /* Sidebar alongside main content */
+  section:has(.sidebar) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg, 2rem);
+    align-items: start;
+  }
+}
+
+/* ================================
+   Desktop Styles (1024px and above)
+   ================================ */
+@media (min-width: 1024px) {
+  /* Full horizontal navigation */
+  header {
+    & nav[aria-label="Main navigation"] ul {
+      justify-content: flex-start;
+      gap: var(--spacing-md, 1.5rem);
+    }
+  }
+  
+  /* Three column grid for projects */
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg, 2rem);
+  }
+  
+  /* Maximum width for readability */
+  main {
+    padding: var(--spacing-2xl, 4rem) var(--spacing-xl, 3rem);
+  }
+  
+  /* Grid layout for featured work section */
+  section:has(article):has(.sidebar) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl, 3rem);
+    align-items: start;
+  }
+  
+  /* Larger images on desktop */
+  picture img {
+    max-height: 600px;
+    object-fit: cover;
+  }
+  
+  /* Hover effects more pronounced on desktop */
+  .project-grid article:hover {
+    transform: translateY(-12px);
+  }
+  
+  /* Multi-column form layout */
+  form fieldset {
+    & > div {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg, 2rem);
+      
+      &:has(textarea),
+      &:has(input[type="range"]) {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+}
+
+/* ================================
+   PART 3: Print Styles
+   ================================ */
+@media print {
+  header,
+  nav,
+  footer,
+  button,
+  dialog {
+    display: none;
+  }
+  
+  main {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  section {
+    page-break-inside: avoid;
+    box-shadow: none;
+  }
+  
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+}
+
+/* ================================
+   PART 3: Reduced Motion Support
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ================================
+   PART 3: Dark Mode Support (Bonus)
+   ================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: #f3f4f6;
+    --color-text-light: #d1d5db;
+    --color-background: #1f2937;
+    --color-surface: #374151;
+    --color-border: #4b5563;
+  }
+  
+  header {
+    background: linear-gradient(135deg, #1e40af 0%, #6b21a8 100%);
+  }
+  
+  img {
+    opacity: 0.9;
+  }
+}
+
+/* ================================
+   PART 3: Landscape Orientation
+   ================================ */
+@media (orientation: landscape) and (max-height: 500px) {
+  header {
+    padding: var(--spacing-sm, 1rem);
+    
+    & h1 {
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-xs, 0.5rem);
+    }
+    
+    & > p {
+      display: none;
+    }
+  }
+  
+  section {
+    padding: var(--spacing-md, 1.5rem);
+    margin-bottom: var(--spacing-md, 1.5rem);
+  }
+}
+
+/* ================================
+   Accessibility Improvements
+   ================================ */
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--color-accent, #f59e0b);
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary, #2563eb);
+  color: white;
+  padding: var(--spacing-sm, 1rem);
+  text-decoration: none;
+  z-index: 100;
+  
+  &:focus {
+    top: 0;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px;
+  }
+  
+  button,
+  input,
+  select,
+  textarea {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ================================
+   Noscript Styling
+   ================================ */
+noscript {
+  display: block;
+  padding: var(--spacing-md, 1.5rem);
+  background-color: var(--color-accent, #f59e0b);
+  color: var(--color-text, #1f2937);
+  text-align: center;
+  font-weight: 600;
+}
