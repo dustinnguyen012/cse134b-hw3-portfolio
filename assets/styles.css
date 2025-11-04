@@ -1,4 +1,3 @@
-
 /* Custom Fonts with Fallbacks (Part 1) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
 
@@ -133,9 +132,8 @@ header > p {
   opacity: 0.9;
 }
 
-/* Nested and Scoped CSS Examples (Part 1 - 4 pts) */
 
-/* Example 1: Navigation with nested selectors */
+/* Navigation with nested selectors */
 nav[aria-label="Main navigation"] {
   & ul {
     display: flex;
@@ -168,7 +166,7 @@ nav[aria-label="Main navigation"] {
   }
 }
 
-/* Example 2: Sidebar with nested structure */
+/* Sidebar with nested structure */
 .sidebar {
   background-color: var(--color-background, #ffffff);
   padding: var(--spacing-lg, 2rem);
@@ -189,7 +187,7 @@ nav[aria-label="Main navigation"] {
   }
 }
 
-/* Example 3: Filter buttons with nested states */
+/*Filter buttons with nested states */
 .filter-btn {
   background-color: var(--color-surface, #f3f4f6);
   color: var(--color-text, #1f2937);
@@ -222,7 +220,7 @@ nav[aria-label="Main navigation"] {
   }
 }
 
-/* Example 4: Form with deeply nested structure */
+/*Form with deeply nested structure */
 form {
   background-color: var(--color-background, #ffffff);
   padding: var(--spacing-xl, 3rem);
@@ -269,7 +267,7 @@ form {
   }
 }
 
-/* Example 5: Project grid with nested article styling */
+/*Project grid with nested article styling */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -322,6 +320,7 @@ nav[aria-label="Main navigation"] ul li a:hover {
 nav[aria-label="Main navigation"] ul li a:active {
   transform: translateY(0);
 }
+
 
 header:has(nav a:hover) {
   box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
@@ -812,8 +811,12 @@ iframe {
 
 /* RESPONSIVE DESIGN - MOBILE FIRST (Part 3) */
 
-/* Hamburger menu button */
-.menu-toggle {
+/* Pure CSS Hamburger Menu (no JavaScript required) */
+.menu-toggle-checkbox {
+  display: none;
+}
+
+.menu-toggle-label {
   display: none;
   background: none;
   border: none;
@@ -821,11 +824,29 @@ iframe {
   font-size: 1.5rem;
   cursor: pointer;
   padding: var(--spacing-xs, 0.5rem);
+  position: relative;
+  z-index: 1001;
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 /* Mobile Styles (< 768px) - Part 3 */
 @media (max-width: 767px) {
-  header .menu-toggle {
+  .menu-toggle-label {
     display: block;
     margin-bottom: var(--spacing-sm, 1rem);
   }
@@ -837,8 +858,22 @@ iframe {
     transition: max-height 0.3s ease;
   }
   
-  header nav[aria-label="Main navigation"] ul.active {
+  /* When checkbox is checked, show menu */
+  .menu-toggle-checkbox:checked ~ nav[aria-label="Main navigation"] ul {
     max-height: 500px;
+  }
+  
+  /* Animate hamburger to X when open */
+  .menu-toggle-checkbox:checked ~ .menu-toggle-label .hamburger-icon span:nth-child(1) {
+    transform: rotate(45deg) translateY(7px);
+  }
+  
+  .menu-toggle-checkbox:checked ~ .menu-toggle-label .hamburger-icon span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle-checkbox:checked ~ .menu-toggle-label .hamburger-icon span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-7px);
   }
   
   header nav[aria-label="Main navigation"] ul li {
