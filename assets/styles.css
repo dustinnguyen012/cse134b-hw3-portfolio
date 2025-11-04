@@ -133,10 +133,7 @@ header > p {
   opacity: 0.9;
 }
 
-/* Nested and Scoped CSS Examples (Part 1 - 4 pts)
-   Note: These demonstrate CSS nesting capability. The W3C validator may show warnings
-   as it's still catching up to browser implementations, but all modern browsers
-   (Chrome, Firefox, Safari, Edge) fully support this Baseline 2024 feature. */
+/* Nested and Scoped CSS Examples (Part 1 - 4 pts) */
 
 /* Example 1: Navigation with nested selectors */
 nav[aria-label="Main navigation"] {
@@ -326,21 +323,6 @@ nav[aria-label="Main navigation"] ul li a:active {
   transform: translateY(0);
 }
 
-/* Baseline 2024 Feature: :has() pseudo-class (Part 1) 
-   
-   DESCRIPTION:
-   The :has() pseudo-class, also known as the "parent selector," became baseline 
-   in 2024 and represents one of the most significant additions to CSS in recent years. 
-   This selector allows CSS to style parent elements based on the presence or state of 
-   their descendants, something that previously required JavaScript. In my implementation, 
-   I use header:has(nav a:hover) to apply an enhanced shadow effect to the entire header 
-   when any navigation link is being hovered. This creates a cohesive visual response 
-   where the container element reacts to user interaction with its children. The :has() 
-   selector opens up powerful new patterns for responsive design, state management, and 
-   interactive interfaces—all achievable with pure CSS. It's particularly valuable for 
-   creating adaptive layouts that respond to content, such as adjusting a container's 
-   styling when it contains specific elements or when those elements are in certain states.
-*/
 header:has(nav a:hover) {
   box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
 }
