@@ -6,9 +6,6 @@
   <title>Projects - Dustin Nguyen</title>
   <meta name="description" content="Portfolio of web development and design projects">
   <link rel="stylesheet" href="assets/styles.css">
-  <style>
-    .project-grid { border: 2px solid #333; }
-  </style>
 </head>
 <body>
   <header>
@@ -34,64 +31,67 @@
 
     <section>
       <h2>Filter Projects</h2>
-      <div>
-        <p>Categories: <span>(buttons for demonstration only)</span></p>
-        <button type="button">All Projects</button>
-        <button type="button">Web Development</button>
-        <button type="button">UX Design</button>
-        <button type="button">Data Visualization</button>
+      <div class="filter-buttons">
+        <p>Categories:</p>
+        <button type="button" class="filter-btn active" data-category="all">All Projects</button>
+        <button type="button" class="filter-btn" data-category="web-dev">Web Development</button>
+        <button type="button" class="filter-btn" data-category="ux">UX Design</button>
+        <button type="button" class="filter-btn" data-category="data-viz">Data Visualization</button>
       </div>
     </section>
 
     <section class="project-grid">
       <h2>Featured Work</h2>
       
-      <article>
-        <h3>Project 1</h3>
+      <article data-category="web-dev">
+        <h3>FitTrack Pro - Fitness Tracker</h3>
         <picture>
           <source srcset="assets/images/project1.webp" type="image/webp">
-          <img src="assets/images/project1.jpg" alt="Project 1 screenshot" width="400" height="300">
+          <img src="assets/images/project1.jpg" alt="FitTrack Pro fitness tracking app screenshot" width="400" height="300">
         </picture>
-        <p>This is a <b>sample description</b> for project 1. <em>More details</em> about this project and <i>technologies used</i> would go here.</p>
+        <p>A mobile-first fitness tracking app for logging workouts and monitoring strength training progress. Features real-time statistics, custom routines, and progress visualization.</p>
         <div>
           <p><strong>Status:</strong> Complete</p>
           <progress value="100" max="100">Complete</progress>
           <br>
           <span>Project completed</span>
         </div>
-        <p><a href="projects/project1.html">View details</a></p>
+        <p><strong>Tech Stack:</strong> React, TypeScript, Firebase, PWA</p>
+        <p><a href="#" onclick="return false;">View details</a></p>
       </article>
 
-      <article>
-        <h3>Project 2</h3>
+      <article data-category="web-dev">
+        <h3>ExpenseTracker - Budget Manager</h3>
         <picture>
           <source srcset="assets/images/project2.webp" type="image/webp">
-          <img src="assets/images/project2.jpg" alt="Project 2 screenshot" width="400" height="300">
+          <img src="assets/images/project2.jpg" alt="ExpenseTracker budget management app screenshot" width="400" height="300">
         </picture>
-        <p>Random description for project 2. This project demonstrates various <strong>web technologies</strong> and design patterns.</p>
+        <p>A personal finance management app for tracking expenses and visualizing spending patterns. Features budget goals, category analysis, and monthly reports with interactive charts.</p>
         <div>
           <p><strong>Status:</strong> In Progress</p>
           <progress value="75" max="100">75% complete</progress>
           <br>
           <span>Currently in development</span>
         </div>
-        <p><a href="projects/project2.html">View details</a></p>
+        <p><strong>Tech Stack:</strong> React, Chart.js, IndexedDB</p>
+        <p><a href="#" onclick="return false;">View details</a></p>
       </article>
 
-      <article>
-        <h3>Project 3</h3>
+      <article data-category="data-viz">
+        <h3>WeatherWise - Dashboard</h3>
         <picture>
           <source srcset="assets/images/project3.webp" type="image/webp">
-          <img src="assets/images/project3.jpg" alt="Project 3 screenshot" width="400" height="300">
+          <img src="assets/images/project3.jpg" alt="WeatherWise dashboard screenshot" width="400" height="300">
         </picture>
-        <p>Sample text describing project 3. Additional information about the project scope and outcomes.</p>
+        <p>An interactive weather dashboard providing real-time forecasts and alerts. Features location search, 7-day forecasts, and dynamic visualizations that change based on weather conditions.</p>
         <div>
           <p><strong>Status:</strong> Complete</p>
           <progress value="100" max="100">Complete</progress>
           <br>
           <span>Live and deployed</span>
         </div>
-        <p><a href="projects/project3.html">View details</a></p>
+        <p><strong>Tech Stack:</strong> JavaScript, Weather API, Chart.js</p>
+        <p><a href="#" onclick="return false;">View details</a></p>
       </article>
     </section>
 
@@ -108,24 +108,43 @@
     <p><a href="index.html">Back to Home</a> | <a href="contact.html">Get in Touch</a></p>
   </footer>
 
-  <!-- Hamburger Menu Script (under 15 lines) -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('header');
-  if (header && window.innerWidth < 768) {
-    const button = document.createElement('button');
-    button.className = 'menu-toggle';
-    button.textContent = '☰ Menu';
-    button.setAttribute('aria-label', 'Toggle navigation menu');
-    header.insertBefore(button, header.querySelector('nav'));
-    button.addEventListener('click', () => {
-      const nav = header.querySelector('nav ul');
-      nav.classList.toggle('active');
-      button.textContent = nav.classList.contains('active') ? '✕ Close' : '☰ Menu';
+  <!-- Project Filter Script (under 15 lines) -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project-grid article');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        projects.forEach(project => {
+          project.classList.toggle('hidden', category !== 'all' && project.dataset.category !== category);
+        });
+      });
     });
-  }
-});
-</script>
+  });
+  </script>
+
+  <!-- Hamburger Menu Script (under 15 lines) -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+    if (header && window.innerWidth < 768) {
+      const button = document.createElement('button');
+      button.className = 'menu-toggle';
+      button.textContent = '☰ Menu';
+      button.setAttribute('aria-label', 'Toggle navigation menu');
+      header.insertBefore(button, header.querySelector('nav'));
+      button.addEventListener('click', () => {
+        const nav = header.querySelector('nav ul');
+        nav.classList.toggle('active');
+        button.textContent = nav.classList.contains('active') ? '✕ Close' : '☰ Menu';
+      });
+    }
+  });
+  </script>
 
 </body>
 </html>

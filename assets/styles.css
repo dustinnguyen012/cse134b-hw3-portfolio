@@ -1,10 +1,9 @@
+/* Custom Fonts with Fallbacks (Part 1) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
 
-/* ================================
-   PART 1: CSS Variables with Fallbacks
-   ================================ */
+/* CSS Variables with Fallbacks (Part 1) */
 :root {
-  /* Color Variables */
+  /* Colors */
   --color-primary: #2563eb;
   --color-primary-dark: #1e40af;
   --color-secondary: #7c3aed;
@@ -16,7 +15,7 @@
   --color-border: #e5e7eb;
   --color-success: #10b981;
   
-  /* Spacing Variables */
+  /* Spacing - Relative Units (Part 1) */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
@@ -24,7 +23,7 @@
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
   
-  /* Typography Variables */
+  /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-size-sm: 0.875rem;
@@ -34,20 +33,18 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 2rem;
   
-  /* Layout Variables */
+  /* Layout */
   --max-width: 1200px;
   --border-radius: 0.5rem;
   --transition-speed: 0.3s;
   
-  /* Shadow Variables */
+  /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* ================================
-   Base Styles with Relative Units
-   ================================ */
+/* Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -55,23 +52,21 @@
 }
 
 html {
-  font-size: 16px; /* Base for rem calculations */
+  font-size: 16px;
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-sans, sans-serif); /* Fallback to sans-serif */
+  font-family: var(--font-sans, sans-serif);
   color: var(--color-text, #1f2937);
   background-color: var(--color-background, #ffffff);
   line-height: 1.6;
   font-size: var(--font-size-base, 1rem);
 }
 
-/* ================================
-   PART 1: Typography with Custom Fonts
-   ================================ */
+/* Typography with Custom Fonts (Part 1) */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display, serif); /* Fallback to serif */
+  font-family: var(--font-display, serif);
   line-height: 1.2;
   margin-bottom: 1rem;
   font-weight: 700;
@@ -96,6 +91,7 @@ p {
   margin-bottom: 1rem;
 }
 
+/* Links with Transitions (Part 1) */
 a {
   color: var(--color-primary, #2563eb);
   text-decoration: none;
@@ -112,9 +108,7 @@ a {
   }
 }
 
-/* ================================
-   PART 1: CSS Grid Layout for Header
-   ================================ */
+/* Header with Flexbox (Part 1) */
 header {
   background: linear-gradient(135deg, 
     var(--color-primary, #2563eb) 0%, 
@@ -138,10 +132,7 @@ header {
   }
 }
 
-/* ================================
-   PART 1 & 3: Responsive Navigation with Flexbox
-   BASELINE 2024: :has() selector for dynamic styling
-   ================================ */
+/* Responsive Navigation with Flexbox (Part 1 & 3) */
 nav[aria-label="Main navigation"] {
   & ul {
     display: flex;
@@ -174,25 +165,20 @@ nav[aria-label="Main navigation"] {
   }
 }
 
-/* BASELINE 2024 FEATURE: :has() pseudo-class
-   Style header differently when navigation contains active link */
+/* Baseline 2024 Feature: :has() pseudo-class (Part 1) */
 header:has(nav a:hover) {
   box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
 }
 
-/* ================================
-   PART 1: Main Layout with CSS Grid
-   ================================ */
+/* Main Layout with Dynamic Viewport Units (Part 1) */
 main {
   max-width: var(--max-width, 1200px);
   margin: 0 auto;
   padding: var(--spacing-xl, 3rem) var(--spacing-md, 1.5rem);
-  min-height: 70dvh; /* Dynamic viewport height */
+  min-height: 70dvh;
 }
 
-/* ================================
-   PART 1: Section Styling with Flexbox
-   ================================ */
+/* Section Styling with Nested CSS (Part 1) */
 section {
   margin-bottom: var(--spacing-2xl, 4rem);
   padding: var(--spacing-lg, 2rem);
@@ -200,7 +186,6 @@ section {
   border-radius: var(--border-radius, 0.5rem);
   box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
   
-  /* NESTED CSS */
   & h2 {
     margin-top: 0;
     padding-bottom: var(--spacing-sm, 1rem);
@@ -216,17 +201,38 @@ section {
     & h3, & h4 {
       color: var(--color-secondary, #7c3aed);
     }
+    
+    /* Flexbox layout for article content */
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md, 1.5rem);
+      
+      & picture {
+        flex-shrink: 0;
+      }
+      
+      & > div {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm, 1rem);
+      }
+    }
   }
 }
 
-/* ================================
-   PART 1: Project Grid with CSS Grid
-   ================================ */
+/* Project Grid with CSS Grid (Part 1) */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-lg, 2rem);
   padding: var(--spacing-lg, 2rem);
+  border: 2px solid var(--color-border, #e5e7eb);
+  
+  & > h2 {
+    grid-column: 1 / -1;
+    margin-bottom: var(--spacing-md, 1.5rem);
+  }
   
   & article {
     display: flex;
@@ -240,9 +246,7 @@ section {
   }
 }
 
-/* ================================
-   PART 1 & 2: Responsive Images
-   ================================ */
+/* Responsive Images (Part 2) */
 img {
   max-width: 100%;
   height: auto;
@@ -261,9 +265,7 @@ picture {
   }
 }
 
-/* ================================
-   PART 1: Sidebar with Flexbox
-   ================================ */
+/* Sidebar */
 .sidebar {
   background-color: var(--color-background, #ffffff);
   padding: var(--spacing-lg, 2rem);
@@ -283,9 +285,7 @@ picture {
   }
 }
 
-/* ================================
-   PART 1: Forms Styling
-   ================================ */
+/* Form Styling with Nested CSS (Part 1) */
 form {
   background-color: var(--color-background, #ffffff);
   padding: var(--spacing-xl, 3rem);
@@ -372,9 +372,7 @@ form {
   }
 }
 
-/* ================================
-   PART 1: Progress Bar Styling
-   ================================ */
+/* Progress Bar Styling */
 progress {
   width: 100%;
   height: 1.5rem;
@@ -403,9 +401,7 @@ progress {
   }
 }
 
-/* ================================
-   PART 1: Animations, Transitions, and Transforms
-   ================================ */
+/* CSS Animations, Transitions, and Transforms (Part 1) */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -437,12 +433,11 @@ progress {
   }
 }
 
-/* Apply animations to sections */
 section {
   animation: fadeIn 0.6s ease-out;
 }
 
-/* Animated button hover effect */
+/* Button hover animation */
 button, 
 input[type="submit"],
 input[type="button"] {
@@ -468,7 +463,7 @@ input[type="button"] {
   }
 }
 
-/* Animated links */
+/* Navigation link animation */
 nav a {
   position: relative;
   
@@ -488,9 +483,7 @@ nav a {
   }
 }
 
-/* ================================
-   PART 1: Dialog Styling
-   ================================ */
+/* Dialog Styling */
 dialog {
   border: none;
   border-radius: var(--border-radius, 0.5rem);
@@ -504,9 +497,7 @@ dialog {
   }
 }
 
-/* ================================
-   PART 1: Custom Elements Styling
-   ================================ */
+/* Custom Elements Styling */
 project-card, demo-card {
   display: block;
   padding: var(--spacing-lg, 2rem);
@@ -521,9 +512,60 @@ project-card, demo-card {
   }
 }
 
-/* ================================
-   PART 1: Breadcrumb Navigation
-   ================================ */
+/* Filter Buttons Styling */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm, 1rem);
+  align-items: center;
+  margin-top: var(--spacing-md, 1.5rem);
+  
+  & p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-text, #1f2937);
+  }
+}
+
+/* Filter button styling */
+.filter-btn {
+  background-color: var(--color-surface, #f3f4f6);
+  color: var(--color-text, #1f2937);
+  border: 2px solid var(--color-border, #e5e7eb);
+  padding: var(--spacing-xs, 0.5rem) var(--spacing-md, 1.5rem);
+  border-radius: var(--border-radius, 0.5rem);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed, 0.3s) ease;
+  font-family: var(--font-sans, sans-serif);
+  
+  &:hover {
+    background-color: var(--color-primary, #2563eb);
+    color: white;
+    border-color: var(--color-primary, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &.active {
+    background-color: var(--color-primary, #2563eb);
+    color: white;
+    border-color: var(--color-primary, #2563eb);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  }
+}
+
+/* Hidden projects for filtering */
+.project-grid article.hidden {
+  display: none;
+}
+
+/* Breadcrumb Navigation */
 nav[aria-label="Breadcrumb"] {
   margin-bottom: var(--spacing-lg, 2rem);
   
@@ -555,9 +597,7 @@ nav[aria-label="Breadcrumb"] {
   }
 }
 
-/* ================================
-   Footer Styling
-   ================================ */
+/* Footer */
 footer {
   background-color: var(--color-text, #1f2937);
   color: white;
@@ -582,9 +622,7 @@ footer {
   }
 }
 
-/* ================================
-   SVG Styling
-   ================================ */
+/* SVG Styling */
 svg {
   max-width: 100%;
   height: auto;
@@ -592,9 +630,7 @@ svg {
   margin: var(--spacing-md, 1.5rem) auto;
 }
 
-/* ================================
-   Iframe Responsive
-   ================================ */
+/* Responsive Iframe */
 iframe {
   max-width: 100%;
   border-radius: var(--border-radius, 0.5rem);
@@ -602,19 +638,11 @@ iframe {
   margin: var(--spacing-md, 1.5rem) 0;
 }
 
-/* ================================
-   PART 3: RESPONSIVE DESIGN - MOBILE FIRST
-   Media Queries for Phone, Tablet, Desktop
-   ================================ */
+/* RESPONSIVE DESIGN - MOBILE FIRST (Part 3) */
 
-/* ================================
-   Mobile Styles (Base - up to 768px)
-   ================================ */
-/* Mobile is the default above */
-
-/* Hamburger menu button (mobile only) */
+/* Hamburger menu button */
 .menu-toggle {
-  display: none; /* Hidden by default, shown in mobile view */
+  display: none;
   background: none;
   border: none;
   color: white;
@@ -623,9 +651,8 @@ iframe {
   padding: var(--spacing-xs, 0.5rem);
 }
 
-/* Stack navigation vertically on small screens */
+/* Mobile Styles (< 768px) - Part 3 */
 @media (max-width: 767px) {
-  /* Show hamburger menu button */
   header {
     & .menu-toggle {
       display: block;
@@ -653,7 +680,6 @@ iframe {
     }
   }
   
-  /* Reduce padding for mobile */
   main {
     padding: var(--spacing-lg, 2rem) var(--spacing-sm, 1rem);
   }
@@ -663,13 +689,11 @@ iframe {
     margin-bottom: var(--spacing-lg, 2rem);
   }
   
-  /* Single column grid on mobile */
   .project-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md, 1.5rem);
   }
   
-  /* Stack form elements */
   form {
     padding: var(--spacing-lg, 2rem) var(--spacing-md, 1.5rem);
     
@@ -680,7 +704,6 @@ iframe {
     }
   }
   
-  /* Smaller typography on mobile */
   h1 {
     font-size: 1.75rem;
   }
@@ -689,23 +712,21 @@ iframe {
     font-size: 1.5rem;
   }
   
-  /* Adjust dialog for mobile */
   dialog {
     max-width: 95vw;
     padding: var(--spacing-md, 1.5rem);
   }
   
-  /* Make iframe responsive */
   iframe {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
   }
   
-  /* Touch-friendly sizing for buttons and links */
+  /* Touch-friendly sizing */
   button,
   a {
-    min-height: 44px; /* Apple's recommended touch target size */
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -714,13 +735,21 @@ iframe {
   nav[aria-label="Main navigation"] ul li a {
     padding: var(--spacing-md, 1.5rem) var(--spacing-sm, 1rem);
   }
+  
+  /* Filter buttons stack on mobile */
+  .filter-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
-/* ================================
-   Tablet Styles (768px - 1024px)
-   ================================ */
+/* Tablet Styles (768px - 1023px) - Part 3 */
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* Navigation can be horizontal but condensed */
   header nav[aria-label="Main navigation"] ul {
     justify-content: center;
     gap: var(--spacing-xs, 0.5rem);
@@ -731,13 +760,11 @@ iframe {
     }
   }
   
-  /* Two column grid for projects */
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md, 1.5rem);
   }
   
-  /* Moderate padding */
   main {
     padding: var(--spacing-xl, 3rem) var(--spacing-lg, 2rem);
   }
@@ -746,27 +773,46 @@ iframe {
     padding: var(--spacing-lg, 2rem) var(--spacing-md, 1.5rem);
   }
   
-  /* Two column form layout where appropriate */
   form fieldset > div {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-md, 1.5rem);
   }
   
-  /* Sidebar alongside main content */
   section:has(.sidebar) {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: var(--spacing-lg, 2rem);
     align-items: start;
+    
+    & > h2 {
+      grid-column: 1 / -1;
+      margin-bottom: var(--spacing-md, 1.5rem);
+    }
+    
+    & > article {
+      margin-bottom: 0;
+    }
+  }
+  
+  /* Article content side-by-side */
+  article > div {
+    flex-direction: row !important;
+    align-items: flex-start;
+    
+    & picture {
+      flex: 0 0 45%;
+      max-width: 45%;
+    }
+    
+    & > div {
+      flex: 1;
+    }
   }
 }
 
-/* ================================
-   Desktop Styles (1024px and above)
-   ================================ */
+/* Desktop Styles (1024px+) - Part 3 */
 @media (min-width: 1024px) {
-  /* Full horizontal navigation */
   header {
     & nav[aria-label="Main navigation"] ul {
       justify-content: flex-start;
@@ -774,37 +820,50 @@ iframe {
     }
   }
   
-  /* Three column grid for projects */
   .project-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-lg, 2rem);
   }
   
-  /* Maximum width for readability */
   main {
     padding: var(--spacing-2xl, 4rem) var(--spacing-xl, 3rem);
   }
   
-  /* Grid layout for featured work section */
   section:has(article):has(.sidebar) {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: var(--spacing-xl, 3rem);
     align-items: start;
+    
+    & > h2 {
+      grid-column: 1 / -1;
+      margin-bottom: var(--spacing-lg, 2rem);
+    }
+    
+    & > article {
+      margin-bottom: 0;
+    }
   }
   
-  /* Larger images on desktop */
+  /* Article content optimized for desktop */
+  article > div {
+    gap: var(--spacing-lg, 2rem) !important;
+    
+    & picture {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  
   picture img {
     max-height: 600px;
     object-fit: cover;
   }
   
-  /* Hover effects more pronounced on desktop */
   .project-grid article:hover {
     transform: translateY(-12px);
   }
   
-  /* Multi-column form layout */
   form fieldset {
     & > div {
       display: grid;
@@ -819,9 +878,7 @@ iframe {
   }
 }
 
-/* ================================
-   PART 3: Print Styles
-   ================================ */
+/* Print Styles */
 @media print {
   header,
   nav,
@@ -852,9 +909,7 @@ iframe {
   }
 }
 
-/* ================================
-   PART 3: Reduced Motion Support
-   ================================ */
+/* Reduced Motion Support (Accessibility) */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -865,9 +920,7 @@ iframe {
   }
 }
 
-/* ================================
-   PART 3: Dark Mode Support (Bonus)
-   ================================ */
+/* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-text: #f3f4f6;
@@ -886,9 +939,7 @@ iframe {
   }
 }
 
-/* ================================
-   PART 3: Landscape Orientation
-   ================================ */
+/* Landscape Orientation */
 @media (orientation: landscape) and (max-height: 500px) {
   header {
     padding: var(--spacing-sm, 1rem);
@@ -909,16 +960,12 @@ iframe {
   }
 }
 
-/* ================================
-   Accessibility Improvements
-   ================================ */
-/* Focus visible for keyboard navigation */
+/* Accessibility */
 *:focus-visible {
   outline: 3px solid var(--color-accent, #f59e0b);
   outline-offset: 2px;
 }
 
-/* Skip to main content link */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -934,7 +981,7 @@ iframe {
   }
 }
 
-/* High contrast mode support */
+/* High Contrast Mode Support */
 @media (prefers-contrast: high) {
   * {
     border-width: 2px;
@@ -948,9 +995,7 @@ iframe {
   }
 }
 
-/* ================================
-   Noscript Styling
-   ================================ */
+/* Noscript Styling */
 noscript {
   display: block;
   padding: var(--spacing-md, 1.5rem);
@@ -959,3 +1004,19 @@ noscript {
   text-align: center;
   font-weight: 600;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
